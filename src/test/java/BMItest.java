@@ -9,6 +9,9 @@ import org.junit.runner.RunWith;
 
 import java.math.BigDecimal;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
+
 @RunWith(JUnitParamsRunner.class)
 public class BMItest {
 
@@ -17,41 +20,71 @@ public class BMItest {
     @Before
     public void setUp() {
         male = new Person("Male", 29);
-
     }
 
-    private Object[] customParams() {
+    @Test
+    @Parameters(method = "testMethodForCheckTheWeightValue")
+    public void checkIfTheWeightIsCorrectlyEntered(double weight, double expected) {
+            male.setBmi(new BodyMassIndex(1.73, weight));
+            assertEquals(expected, male.getBmi().getWeight(), 0.01);
+    }
+
+    private Object[] testMethodForCheckTheWeightValue() {
         return new Object[]{
-                new Object[]{173, 68, 22.72}
+                new Object[]{68, 68}
         };
     }
 
     @Test
-    @Parameters(method = "customParams")
-    public void checkIfTheBalanceIsCorrectlyEntered(double growth, double weight, double expected){
-
-
+    @Parameters ({"173", "1730"})
+    public void checkThrowIfWeightIsIncorrect(double weight){
+        try{
+            male.setBmi(new BodyMassIndex(1.73,weight));
+            fail();
+        }catch (IllegalArgumentException e){
+            e.getMessage();
+        }
+    }
+    private String testMethodForCheckTheWeightThrow() {
+        return "1.73, 173, 1730";
     }
 
     @Test
-    @Parameters(method = "customParams")
-    public void checkIfTheGrowthIsCorrectlyEntered(double growth, double weight, double expected){
-
+    @Parameters(method = "testMethodForCheckTheGrowthValue")
+    public void checkIfTheGrowthIsCorrectlyEntered(double growth, double expected) {
+        male.setBmi(new BodyMassIndex(growth, 68));
+        assertEquals(expected, male.getBmi().getGrowth(), 0.01);
+    }
+    private Object[] testMethodForCheckTheGrowthValue() {
+        return new Object[]{
+                new Object[]{1.73, 1.73}
+        };
     }
 
     @Test
-    @Parameters(method = "customParams")
+    @Parameters ({"0.1","4.45",})
+    public void checkThrowIfGrowthIsIncorrect(double growth){
+        try{
+            male.setBmi(new BodyMassIndex(growth, 68));
+            fail();
+        }catch (IllegalArgumentException e){
+            e.getMessage();
+        }
+    }
+    private String testMethodForCheckTheGrowthThrow() {
+        return "0.1,4,45,100";
+    }
+
+    @Test
+    @Parameters(method = "testMethodForBMIcalculator")
     public void calcBMIforCustomHeightAndWeight(double growth, double weight, double expected) {
         male.setBmi(new BodyMassIndex(growth, weight));
-        Assert.assertEquals(expected, male.getBmi().calcBMI(),0.01);
+        assertEquals(expected, male.getBmi().calcBMI(), 0.01);
     }
 
-
-
-    @Test
-    public void checkIsBMIgood() {
-
+    private Object[] testMethodForBMIcalculator() {
+        return new Object[]{
+                new Object[]{1.73, 68, 22.72}
+        };
     }
-
-
 }
