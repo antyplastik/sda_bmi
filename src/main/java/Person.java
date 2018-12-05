@@ -1,10 +1,11 @@
 public class Person {
 
-    private String gender;
+    private Gender gender;
     private int age;
     private BodyMassIndex bmi;
+    private BMIanalyzer bmIanalyzer;
 
-    public Person(String gender, int age) {
+    public Person(Gender gender, int age) {
         this.gender = gender;
         this.age = age;
     }
@@ -16,4 +17,12 @@ public class Person {
     public void setBmi(BodyMassIndex bmi) {
         this.bmi = bmi;
     }
+
+    public BMIanalyzer getBmIanalyzer() {
+        return bmIanalyzer;
+    }
+}
+
+enum Gender {
+    MALE, FEMALE
 }

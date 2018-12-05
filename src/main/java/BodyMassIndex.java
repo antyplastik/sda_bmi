@@ -1,5 +1,3 @@
-import java.util.logging.Logger;
-
 import static java.lang.Math.*;
 
 public class BodyMassIndex implements BMI {
@@ -20,8 +18,17 @@ public class BodyMassIndex implements BMI {
 //        } catch (IllegalArgumentException e) {
 //            logger.info("[ERROR] Bad argument");
 //        }
+        if (growth != 0 && weight !=0)
+            calcBMI();
     }
 
+    public void setGrowth(double growth) {
+        this.growth = growth;
+    }
+
+    public void setWeight(double weight) {
+        this.weight = weight;
+    }
 
     @Override
     public double checkGrowth(double growth) {
@@ -57,4 +64,6 @@ public class BodyMassIndex implements BMI {
     public double getBodyMassIndex() {
         return bodyMassIndex;
     }
+
+
 }

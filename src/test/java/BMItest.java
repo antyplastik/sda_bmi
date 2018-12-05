@@ -1,14 +1,8 @@
 import junitparams.JUnitParamsRunner;
 import junitparams.Parameters;
-import junitparams.converters.Param;
-import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.Assert.*;
 import org.junit.runner.RunWith;
-
-import java.math.BigDecimal;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
@@ -19,7 +13,7 @@ public class BMItest {
 
     @Before
     public void setUp() {
-        male = new Person("Male", 29);
+        male = new Person(Gender.MALE, 29);
     }
 
     @Test
@@ -36,7 +30,7 @@ public class BMItest {
     }
 
     @Test
-    @Parameters ({"173", "1730"})
+    @Parameters ({"6.8", "680", "301"})
     public void checkThrowIfWeightIsIncorrect(double weight){
         try{
             male.setBmi(new BodyMassIndex(1.73,weight));
