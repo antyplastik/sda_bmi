@@ -48,7 +48,7 @@ public class BodyMassIndex implements BMI {
 
     @Override
     public double calcBMI() {
-        bodyMassIndex = weight / pow(growth, 2);
+        this.bodyMassIndex = weight / pow(growth, 2);
         return bodyMassIndex;
     }
 

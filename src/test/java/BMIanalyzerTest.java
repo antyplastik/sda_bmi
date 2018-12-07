@@ -1,52 +1,76 @@
 import junitparams.JUnitParamsRunner;
-import org.junit.Assert;
+import junitparams.Parameters;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.is;
+import static org.hamcrest.Matchers.equalTo;
 
 @RunWith(JUnitParamsRunner.class)
 public class BMIanalyzerTest {
 
-    Person male;
-    Person female;
+    BMIanalyzer bmiAnalyzer;
 
     @Before
     public void setUp() {
-        male = new Person(Gender.MALE, 29);
-        female = new Person(Gender.FEMALE, 30);
+        bmiAnalyzer = new BMIanalyzer();
     }
 
     @Test
-    public void checkIfTheWomanHasMalnutrition(double growth, double weight) {
-//        assertThat(female.setBmi(new BodyMassIndex(growth,weight)));
+    @Parameters(method = "testMethodToCheckIfPersonHasMalnuration")
+    public void checkIfPersonHasMalnutrition(Gender gender, double bmi, boolean expected) {
+        assertThat(bmiAnalyzer.checkIfMalnuration(gender, bmi), is(expected));
+    }
+
+    private Object[] testMethodToCheckIfPersonHasMalnuration() {
+        return new Object[]{
+                new Object[]{Gender.MALE, 21, false},
+                new Object[]{Gender.MALE, 20.99, true},
+                new Object[]{Gender.MALE, 18, true},
+                new Object[]{Gender.MALE, 15, true},
+                new Object[]{Gender.MALE, 15.01, true},
+
+                new Object[]{Gender.FEMALE, 19, false},
+                new Object[]{Gender.FEMALE, 18.99, true},
+                new Object[]{Gender.FEMALE, 16, true},
+                new Object[]{Gender.FEMALE, 13, true},
+                new Object[]{Gender.FEMALE, 12.99, true},
+        };
     }
 
     @Test
-    public void checkIfTheWomanHasTheCorrectWeight() {
+    @Parameters(method = "testMethodToCheckIfPersonHasTheCorrectWeight")
+    public void checkIfPersonHasTheCorrectWeight(Gender gender, double bmi, boolean expected) {
+        assertThat(bmiAnalyzer.checkIfCorrectWeight(gender, bmi), is(expected));
+    }
 
+    private Object[] testMethodToCheckIfPersonHasTheCorrectWeight() {
+        return new Object[]{
+                new Object[]{Gender.MALE, 20.99, false},
+                new Object[]{Gender.MALE, 21, true},
+                new Object[]{Gender.MALE, 23, true},
+                new Object[]{Gender.MALE, 25, true},
+                new Object[]{Gender.MALE, 25.01, false},
+
+                new Object[]{Gender.FEMALE, 18.99, false},
+                new Object[]{Gender.FEMALE, 19, true},
+                new Object[]{Gender.FEMALE, 21, true},
+                new Object[]{Gender.FEMALE, 23, true},
+                new Object[]{Gender.FEMALE, 24, false},
+        };
     }
 
     @Test
-    public void checkIfTheWomanIsOverweight() {
+    @Parameters(method = "testMethodToCheckIfPersonIsOverweight")
+    public void checkIfPersonIsOverweight(double growth, double weight, boolean expected) {
 
     }
 
-    @Test
-    public void checkIfTheManHasMalnutrition(double growth, double weight, boolean expected) {
-        male.setBmi(new BodyMassIndex(growth, weight));
-        assertThat(male.getBmIanalyzer().checkIfMalnuration(male),is(true));
-    }
-
-    @Test
-    public void checkIfTheManHasTheCorrectWeight(){
-
-    }
-
-    @Test
-    public void checkIfTheManIsOverweight(){
-
+    private Object[] testMethodToCheckIfPersonIsOverweight() {
+        return new Object[]{
+                new Object[]{1.73, 1.73, true}
+        };
     }
 }

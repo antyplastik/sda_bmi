@@ -10,15 +10,24 @@ public class Person {
         this.age = age;
     }
 
-    public BodyMassIndex getBmi() {
-        return bmi;
-    }
-
     public void setBmi(BodyMassIndex bmi) {
         this.bmi = bmi;
     }
 
-    public BMIanalyzer getBmIanalyzer() {
+    public Gender getGender() {
+        return gender;
+    }
+
+    public double getBmiValue() {
+        double bmiValue = bmi.getBodyMassIndex();
+        return bmiValue;
+    }
+
+    public BodyMassIndex getBmi(){
+        return bmi;
+    }
+
+    public BMIanalyzer getBmiAnalyze() {
         return bmIanalyzer;
     }
 }
