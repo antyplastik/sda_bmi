@@ -28,13 +28,13 @@ public class BMIanalyzerTest {
         return new Object[]{
                 new Object[]{Gender.MALE, 21, false},
                 new Object[]{Gender.MALE, 20.99, true},
-                new Object[]{Gender.MALE, 18, true},
+                new Object[]{Gender.MALE, 180, false},
                 new Object[]{Gender.MALE, 15, true},
                 new Object[]{Gender.MALE, 15.01, true},
 
                 new Object[]{Gender.FEMALE, 19, false},
                 new Object[]{Gender.FEMALE, 18.99, true},
-                new Object[]{Gender.FEMALE, 16, true},
+                new Object[]{Gender.FEMALE, 160, false},
                 new Object[]{Gender.FEMALE, 13, true},
                 new Object[]{Gender.FEMALE, 12.99, true},
         };
@@ -50,13 +50,13 @@ public class BMIanalyzerTest {
         return new Object[]{
                 new Object[]{Gender.MALE, 20.99, false},
                 new Object[]{Gender.MALE, 21, true},
-                new Object[]{Gender.MALE, 23, true},
+                new Object[]{Gender.MALE, 230, false},
                 new Object[]{Gender.MALE, 25, true},
                 new Object[]{Gender.MALE, 25.01, false},
 
                 new Object[]{Gender.FEMALE, 18.99, false},
                 new Object[]{Gender.FEMALE, 19, true},
-                new Object[]{Gender.FEMALE, 21, true},
+                new Object[]{Gender.FEMALE, 210, false},
                 new Object[]{Gender.FEMALE, 23, true},
                 new Object[]{Gender.FEMALE, 24, false},
         };
@@ -64,13 +64,23 @@ public class BMIanalyzerTest {
 
     @Test
     @Parameters(method = "testMethodToCheckIfPersonIsOverweight")
-    public void checkIfPersonIsOverweight(double growth, double weight, boolean expected) {
+    public void checkIfPersonIsOverweight(Gender gender, double bmi, boolean expected) { // < =========================== Napisac
 
     }
 
     private Object[] testMethodToCheckIfPersonIsOverweight() {
         return new Object[]{
-                new Object[]{1.73, 1.73, true}
+                new Object[]{Gender.MALE, 20.99, false},
+                new Object[]{Gender.MALE, 21, true},
+                new Object[]{Gender.MALE, 23, false},
+                new Object[]{Gender.MALE, 25, true},
+                new Object[]{Gender.MALE, 25.01, false},
+
+                new Object[]{Gender.FEMALE, 18.99, false},
+                new Object[]{Gender.FEMALE, 19, true},
+                new Object[]{Gender.FEMALE, 21, false},
+                new Object[]{Gender.FEMALE, 23, true},
+                new Object[]{Gender.FEMALE, 24, false},
         };
     }
 }

@@ -6,14 +6,14 @@ public class BMIanalyzer {
     public BMIanalyzer() {
     }
 
-    public BMIanalyzer(String[] bmiAnalyzeOptions){
+    public BMIanalyzer(String[] bmiAnalyzeOptions) {
         this.bmiAnalyzeOptions = bmiAnalyzeOptions;
     }
 
     public boolean checkIfMalnuration(Gender gender, double bmi) {
 
         if (gender.equals(Gender.FEMALE)) {
-            if (bmi < 19 && bmi >=13) {
+            if (bmi < 19 && bmi >= 13) {
                 this.bmiAnalyzeResult = bmiAnalyzeOptions[1];
                 return true;
             } else if (bmi < 13) {
@@ -21,7 +21,7 @@ public class BMIanalyzer {
                 return true;
             }
         } else if (gender.equals(Gender.MALE)) {
-            if (bmi < 21 && bmi >=15) {
+            if (bmi < 21 && bmi >= 15) {
                 this.bmiAnalyzeResult = bmiAnalyzeOptions[1];
                 return true;
             } else if (bmi < 15) {
