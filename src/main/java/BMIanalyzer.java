@@ -10,6 +10,17 @@ public class BMIanalyzer {
         this.bmiAnalyzeOptions = bmiAnalyzeOptions;
     }
 
+    public BMIanalyzer(Person person){
+        Gender gender = person.getGender();
+        double bmi = person.getBmiValue();
+
+        if (gender != null && bmi != 0){
+            if (checkIfCorrectWeight(gender, bmi));
+            else if (checkIfMalnuration(gender, bmi));
+            else if (checkIfOverweight(gender, bmi));
+        }
+    }
+
     public boolean checkIfMalnuration(Gender gender, double bmi) {
 
         if (gender.equals(Gender.FEMALE)) {
